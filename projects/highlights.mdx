@@ -1,0 +1,200 @@
+---
+title: "Project Highlights: My Best Work"
+sidebarTitle: "Highlights"
+description: "A curated selection of my most impactful projects, including open-source tools, web applications, and personal experiments."
+---
+
+Not every project earns a spotlight, but the ones collected here have stood the test of real-world use. These highlights represent work where the problem was genuinely hard, the solution turned out to be genuinely useful, or the process of building it taught me something I couldn't have learned any other way. Each project below includes a code example, relevant links, and a stat or two that gives you a sense of its reach.
+
+---
+
+## devkit-cli
+
+`devkit-cli` is a command-line scaffolding tool that spins up new projects with sensible defaults, best-practice folder structures, and pre-configured tooling — so you spend the first hour of a new project writing code, not configuring linters. It supports a growing library of templates including React, Node.js APIs, and full-stack Next.js setups, with plugin support for custom templates.
+
+```bash
+# Scaffold a new React app with TypeScript, ESLint, and Prettier pre-configured
+devkit init my-app --template react
+
+# List all available templates
+devkit templates list
+
+# Add a plugin to extend your template library
+devkit plugin add @devkit/nextjs-template
+```
+
+<CardGroup cols={3}>
+  <Card title="GitHub" icon="github" href="#">
+    View source, open issues, and contribute
+  </Card>
+  <Card title="Live Demo" icon="play" href="#">
+    Try the interactive template browser
+  </Card>
+  <Card title="Documentation" icon="book" href="#">
+    Full CLI reference and template guide
+  </Card>
+</CardGroup>
+
+<Info>
+  ⭐ **2,400 stars on GitHub** — `devkit-cli` is the most-starred project in my portfolio and is used by developers at over 80 companies worldwide.
+</Info>
+
+---
+
+## queryflow
+
+`queryflow` is a lightweight TypeScript library for composing type-safe database queries without the overhead of a full ORM. It gives you the expressiveness of a query builder with compile-time safety on every field name, operator, and return type — so your editor catches schema mismatches before your users ever see a runtime error.
+
+```typescript
+import { createClient, query, where, orderBy } from "queryflow";
+
+const db = createClient({ connectionString: process.env.DATABASE_URL });
+
+// Fully type-safe: field names and value types are inferred from your schema
+const users = await db
+  .from("users")
+  .select(["id", "email", "createdAt"])
+  .pipe(where("isActive", "=", true))
+  .pipe(orderBy("createdAt", "desc"))
+  .limit(20)
+  .execute<User>();
+```
+
+<CardGroup cols={3}>
+  <Card title="GitHub" icon="github" href="#">
+    Source code and contribution guide
+  </Card>
+  <Card title="Live Demo" icon="play" href="#">
+    Interactive playground with schema editor
+  </Card>
+  <Card title="Documentation" icon="book" href="#">
+    API reference and recipes
+  </Card>
+</CardGroup>
+
+<Info>
+  📦 **Downloaded 18,000+ times per month** on npm — `queryflow` has become a go-to choice for TypeScript developers who want query-builder ergonomics without committing to a heavy ORM.
+</Info>
+
+---
+
+## dashboard-ui
+
+`dashboard-ui` is a React component library purpose-built for admin dashboards and internal tooling. It provides composable, accessible UI primitives — data tables, stat cards, chart wrappers, filter bars, and more — all styled with a consistent design system that's easy to theme. Think of it as the missing layer between a raw UI kit and a full admin framework.
+
+```jsx
+import { StatCard, DataTable, FilterBar } from "dashboard-ui";
+
+export function OrdersDashboard({ orders }) {
+  return (
+    <>
+      <StatCard
+        label="Total Revenue"
+        value="$48,230"
+        trend={{ direction: "up", percent: 12.4 }}
+      />
+      <FilterBar
+        filters={[
+          { key: "status", label: "Status", options: ["pending", "shipped", "delivered"] },
+          { key: "dateRange", label: "Date Range", type: "daterange" },
+        ]}
+        onFilterChange={(filters) => console.log(filters)}
+      />
+      <DataTable
+        columns={[
+          { key: "id", label: "Order ID" },
+          { key: "customer", label: "Customer" },
+          { key: "total", label: "Total", align: "right" },
+          { key: "status", label: "Status" },
+        ]}
+        rows={orders}
+        sortable
+        paginated
+      />
+    </>
+  );
+}
+```
+
+<CardGroup cols={3}>
+  <Card title="GitHub" icon="github" href="#">
+    Source code and changelog
+  </Card>
+  <Card title="Live Demo" icon="play" href="#">
+    Component storybook with live previews
+  </Card>
+  <Card title="Documentation" icon="book" href="#">
+    Component API and theming guide
+  </Card>
+</CardGroup>
+
+<Info>
+  🎨 **Used in 5 production dashboards** — `dashboard-ui` powers the front-end of several internal tools and client-facing admin panels, with accessibility scores consistently above 95 on Lighthouse.
+</Info>
+
+---
+
+## api-mock
+
+`api-mock` is a zero-config API mocking tool for local development. Point it at a single JSON file describing your endpoints and it spins up a fully functional mock server in seconds — complete with realistic response delays, error scenario simulation, and automatic CORS headers. No server code to write, no Docker setup, no fuss.
+
+```json
+{
+  "server": {
+    "port": 3001,
+    "latency": { "min": 80, "max": 300 }
+  },
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/api/users",
+      "response": {
+        "status": 200,
+        "body": [
+          { "id": 1, "name": "Alex Rivera", "email": "alex@example.com" },
+          { "id": 2, "name": "Jordan Lee", "email": "jordan@example.com" }
+        ]
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/users",
+      "response": {
+        "status": 201,
+        "body": { "id": 3, "name": "{{body.name}}", "email": "{{body.email}}" }
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/users/:id",
+      "response": {
+        "status": 404,
+        "body": { "error": "User not found" },
+        "scenario": "not_found"
+      }
+    }
+  ]
+}
+```
+
+<CardGroup cols={3}>
+  <Card title="GitHub" icon="github" href="#">
+    Source code and issue tracker
+  </Card>
+  <Card title="Live Demo" icon="play" href="#">
+    Try the online config builder
+  </Card>
+  <Card title="Documentation" icon="book" href="#">
+    Configuration reference and examples
+  </Card>
+</CardGroup>
+
+<Info>
+  🚀 **500+ developers use `api-mock` daily** — it's become a standard part of several teams' local development setups, replacing heavier solutions like WireMock and custom Express stubs.
+</Info>
+
+---
+
+<Tip>
+  Want to see the full picture? Head back to the [Projects Overview](/projects/overview) for a complete breakdown by category and technology. And if any of this work sparks an idea — or you'd like to collaborate on something new — [get in touch](#). I'm always open to interesting problems.
+</Tip>

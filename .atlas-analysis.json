@@ -1,0 +1,33 @@
+{
+  "projectType": "general",
+  "projectName": "Personal Home Page",
+  "projectDescription": "A personal home page showcasing projects, skills, and contact information.",
+  "theme": "willow",
+  "primaryColor": "#ef7025",
+  "lightColor": "#eec9bc",
+  "darkColor": "#4fa1ab",
+  "navigation": {
+    "groups": [
+      {
+        "group": "About",
+        "pages": ["introduction", "about/skills", "about/experience"]
+      },
+      {
+        "group": "Projects",
+        "pages": ["projects/overview", "projects/highlights"]
+      },
+      {
+        "group": "Connect",
+        "pages": ["connect/contact", "connect/social"]
+      }
+    ]
+  },
+  "keyFeatures": [
+    "Personal biography and background",
+    "Skills and expertise showcase",
+    "Work experience timeline",
+    "Project portfolio highlights",
+    "Contact and social media links"
+  ],
+  "publicApiSurface": []
+}
